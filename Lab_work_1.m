@@ -15,7 +15,6 @@ while (j < 4)
     j = j+1;
 end
 
-
 A = [cosd(theta_4(1,1)), -cosd(theta_2(1,1)), 1 ; cosd(theta_4(1,2)), -cosd(theta_2(1,2)), 1 ; cosd(theta_4(1,3)), -cosd(theta_2(1,3)), 1];
 B = [cosd(theta_2(1,1) - theta_4(1,1)) ; cosd(theta_2(1,2) - theta_4(1,2)) ; cosd(theta_2(1,3) - theta_4(1,3)) ];
 sol = linsolve(A,B);
@@ -31,15 +30,12 @@ fprintf('K3 = %.15g\n',K3);
 crank_length = fixed /K1;
 follower_length = fixed / K2;
 coupler_length = sqrt((crank_length*crank_length)+(follower_length*follower_length)+(fixed*fixed)-(K3*2*crank_length*follower_length));
+
 fprintf('crank_length = %.15g\n',crank_length);
 fprintf('follower_length = %.15g\n',follower_length);
 fprintf('coupler_length = %.15g\n',coupler_length);
+
 %transmssion_angle;
-
-
-
-
-
 theta = 15 :5 :165;
 transmission_angle = acosd(((coupler_length^2)+(follower_length^2)-(crank_length^2)-(fixed^2)+(2*crank_length*fixed*cosd(theta)))/(2*coupler_length*follower_length));
 disp(' ')
@@ -53,7 +49,6 @@ output = 65 + 0.43*theta;
 %structural error part a)
 structural_error = K1*cosd(output)- K2*cosd(theta)+K3-cosd(theta - output);
 disp(structural_error)
-
 disp('TABLE OF INPUT ANGLES AND STRUCTURAL ERRORS')
 disp('   input    error   ')
 disp([theta',structural_error'])
@@ -74,33 +69,18 @@ while (p < 6)
 end
 ci = cosd(theta_22);
 sumci = sum(cosd(theta_22));
-
-
-
 co = cosd(theta_42);
 sumco = sum(cosd(theta_42));
-
-
 sumci2 = sum(cosd(theta_22).^2);
-
-
-
 sumco2 = sum(cosd(theta_42).^2);
-
-
 diff = cosd(theta_22-theta_42);
-
-
 sumd = sum(diff);
-
-
 e1 =     [
         sumco2,  - sum(co.*ci), sum(co);
         sum(co.*ci), -sumci2, sumci;
         sumco,-sumci,5];
 e2 = [sum(co.*diff); sum(ci.*diff); sumd];
 als = linsolve(e1,e2);
-
 
 K1 = als(1);
 K2 = als(2);
@@ -113,14 +93,13 @@ fprintf('K3 = %.15g\n',K3);
 crank_length = fixed /K1;
 follower_length = fixed / K2;
 coupler_length = sqrt((crank_length*crank_length)+(follower_length*follower_length)+(fixed*fixed)-(K3*2*crank_length*follower_length));
+
 fprintf('crank_length = %.15g\n',crank_length);
 fprintf('follower_length = %.15g\n',follower_length);
 fprintf('coupler_length = %.15g\n',coupler_length);
 
 %structural error part b)
 structural_error = K1*cosd(output)- K2*cosd(theta)+K3-cosd(theta - output);
-
-
 disp('TABLE OF INPUT ANGLES AND STRUCTURAL ERRORS')
 disp('   input    error   ')
 disp([theta',structural_error'])
