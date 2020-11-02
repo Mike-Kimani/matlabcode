@@ -12,18 +12,14 @@ while (j < 4)
     precision_4 = (precision_2)*0.43 +65;
     theta_2 = [theta_2, precision_2];
     theta_4 = [theta_4, precision_4 ];
-    %disp(theta_
-    %disp(j);
     j = j+1;
 end
-disp(theta_2);
-disp(theta_4);
-disp(theta_2(1,1));
+
 
 A = [cosd(theta_4(1,1)), -cosd(theta_2(1,1)), 1 ; cosd(theta_4(1,2)), -cosd(theta_2(1,2)), 1 ; cosd(theta_4(1,3)), -cosd(theta_2(1,3)), 1];
 B = [cosd(theta_2(1,1) - theta_4(1,1)) ; cosd(theta_2(1,2) - theta_4(1,2)) ; cosd(theta_2(1,3) - theta_4(1,3)) ];
 sol = linsolve(A,B);
-disp(sol)
+
 K1 = sol(1,1);
 K2 = sol(2,1);
 K3 = sol(3,1);
@@ -52,7 +48,7 @@ disp('   input    transmission   ')
 disp([theta',transmission_angle'])
 subplot(2,1,1),plot(theta,transmission_angle),xlabel('\theta(degrees)'),ylabel('transmission angle'),title('transmission angle vs \theta'),grid on
 output = 65 + 0.43*theta;
-disp(output)
+
 
 %structural error part a)
 structural_error = K1*cosd(output)- K2*cosd(theta)+K3-cosd(theta - output);
@@ -74,32 +70,29 @@ while (p < 6)
     precision_42 = (precision_22)*0.43 +65;
     theta_22 = [theta_22, precision_22];
     theta_42 = [theta_42, precision_42 ];
-    %disp(theta_2);
-    %disp(j);
     p = p+1;
 end
-%disp(theta_22)
 ci = cosd(theta_22);
 sumci = sum(cosd(theta_22));
-disp(sumci)
 
-%disp(theta_42)
+
+
 co = cosd(theta_42);
 sumco = sum(cosd(theta_42));
-disp(sumco)
+
 
 sumci2 = sum(cosd(theta_22).^2);
-disp(sumci2)
 
-%disp(theta_42)
+
+
 sumco2 = sum(cosd(theta_42).^2);
-disp(sumco2)
+
 
 diff = cosd(theta_22-theta_42);
-disp (diff)
+
 
 sumd = sum(diff);
-disp(sumd)
+
 
 e1 =     [
         sumco2,  - sum(co.*ci), sum(co);
@@ -107,7 +100,7 @@ e1 =     [
         sumco,-sumci,5];
 e2 = [sum(co.*diff); sum(ci.*diff); sumd];
 als = linsolve(e1,e2);
-disp(als)
+
 
 K1 = als(1);
 K2 = als(2);
@@ -126,7 +119,7 @@ fprintf('coupler_length = %.15g\n',coupler_length);
 
 %structural error part b)
 structural_error = K1*cosd(output)- K2*cosd(theta)+K3-cosd(theta - output);
-disp(structural_error)
+
 
 disp('TABLE OF INPUT ANGLES AND STRUCTURAL ERRORS')
 disp('   input    error   ')
