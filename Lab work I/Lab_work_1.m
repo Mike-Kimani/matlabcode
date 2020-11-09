@@ -42,17 +42,17 @@ disp(' ')
 disp('TABLE OF ANGULAR INPUT AND TRANSMISSION ANGLES')
 disp('   input    transmission   ')
 disp([theta',transmission_angle'])
-subplot(2,1,1),plot(theta,transmission_angle),xlabel('\theta(degrees)'),ylabel('transmission angle'),title('transmission angle vs \theta'),grid on
+%subplot(1,1,1),plot(theta,transmission_angle),xlabel('\theta(degrees)'),ylabel('transmission angle'),title('transmission angle vs \theta'),grid on
 output = 65 + 0.43*theta;
 
 
 %structural error part a)
 structural_error = K1*cosd(output)- K2*cosd(theta)+K3-cosd(theta - output);
 disp(structural_error)
-disp('TABLE OF INPUT ANGLES AND STRUCTURAL ERRORS')
-disp('   input    error   ')
+disp('TABLE OF INPUT ANGLES AND STRUCTURAL ERRORS FOR PART A')
+disp('   input      error   ')
 disp([theta',structural_error'])
-subplot(2,1,2),plot(theta,structural_error),xlabel('\theta(degrees)'),ylabel('structural error'),title('structural error vs \theta'),grid on
+subplot(1,1,1),plot(theta,structural_error),xlabel('\theta(degrees)'),ylabel('structural error'),title('structural error vs \theta'),grid on
 
 %part b (Least Square)
 disp('LEAST   SQUARE')
@@ -100,13 +100,14 @@ fprintf('coupler_length = %.15g\n',coupler_length);
 
 %structural error part b)
 structural_error = K1*cosd(output)- K2*cosd(theta)+K3-cosd(theta - output);
-disp('TABLE OF INPUT ANGLES AND STRUCTURAL ERRORS')
-disp('   input    error   ')
+disp('TABLE OF INPUT ANGLES AND STRUCTURAL ERRORS FOR PART B')
+disp('   input      error   ')
 disp([theta',structural_error'])
 hold all
-subplot(2,1,2),plot(theta,structural_error),xlabel('\theta(degrees)'),ylabel('structural error'),title('structural error vs \theta'),grid on
-
-
+subplot(1,1,1),plot(theta,structural_error),xlabel('\theta(degrees)'),ylabel('structural error'),title('structural error vs \theta'),grid on
+theta_e = theta';
+filename = 'testd.xlsx';
+%xlswrite(filename,theta_e)
 
 
     
