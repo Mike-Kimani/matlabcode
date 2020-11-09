@@ -39,3 +39,32 @@ disp('   input    transmission   ')
 disp([theta_i',transmission_angle'])
 figure(1)
 plot(theta_i,transmission_angle),xlabel('\theta(degrees)'),ylabel('transmission angle'),title('transmission angle vs \theta'),grid on
+
+%structural errors
+A = sind(theta_i);
+B = cosd(theta_i)-K1;
+C = K3 - K2*cosd(theta_i);
+
+tan_1 = (A + sqrt(A.^2 + B.^2 -C.^2))./(B+C);
+%disp(tan_1)
+tan_2 = (A - sqrt(A.^2 + B.^2 -C.^2))./(B+C);
+%disp(tan_2)
+
+out_1 = 2*atand(tan_1);
+out_2 = 2*atand(tan_2);
+%disp(out_1)
+disp(theta_i)
+disp(out_2)
+disp(K1)
+disp(K2)
+disp(K3)
+
+fprintf('We use the second set out_2 as it corresponds with the input output values given in the question')
+structural_error = K1*cosd(out_2)- K2*cosd(theta_i)+ K3 -cosd(theta_i - out_2);
+disp(structural_error)
+%disp('TABLE OF INPUT ANGLES AND STRUCTURAL ERRORS ')
+%disp('   input      error   ')
+%disp([theta_i',structural_error'])
+figure(2)
+plot(theta_i,structural_error),xlabel('\theta(degrees)'),ylabel('structural error'),title('structural error vs \theta'),grid on
+
